@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anand Loves Gayatri</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 50px 20px;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 1em;
+      border: none;
+      border-radius: 20px;
+      background: #ff4081;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #e91e63;
+    }
+    .hidden {
+      display: none;
+    }
+    .heart-btn {
+      width: 60px;
+      height: 60px;
+      background: red;
+      clip-path: path("M30 10 C 40 -10, 70 -10, 70 20 A 20 20 0 0 1 30 60 A 20 20 0 0 1 -10 20 C -10 -10, 20 -10, 30 10 Z");
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 1.5em;
+      pointer-events: none;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/03/01/audio_5fce4a7a30.mp3?filename=romantic-love-139469.mp3" type="audio/mp3">
+  </audio>
+  <div class="container" id="screen">
+    <h1 id="main-text">Anand Loves Gayatri</h1>
+    <button onclick="nextStep()">Start</button>
+  </div>  <script>
+    const messages = [
+      `निगाहों से दूर नहीं मेरे सामने आती हो.<br> थाम के हाथ मेरा मुस्कुराती हो.<br><br> ना दो उम्मीद सहारे कि मुझे<br>अकेले चलने से तुम भी घबराती हो`,
+      `Mai Tenu supne ch🫶👀💕Vi ni chhad skta🫶👀💕Methon mar ke vi🫶👀💕Hona ni ye paap ve🫶👀💕Je pata krna main pyar🫶👀💕Kinna krda🫶👀💕Tu samundra nu jaake🫶👀💕Lai naap ve🤭<br><br>I love you forever meri #Motiii🙈 #meri_Motiii - #Gayatri🥰`,
+      `I love you forever meri jaan<br><span style='font-size: 2em; animation: fadeIn 1s infinite;'>GAYATRI</span>`,
+      `<button class='heart-btn' onclick='showProposal()'></button>`
+    ];
+
+    let step = 0;
+
+    function nextStep() {
+      const screen = document.getElementById('screen');
+      screen.innerHTML = `<p>${messages[step]}</p>`;
+      step++;
+      if (step < messages.length) {
+        screen.innerHTML += `<br><button onclick='nextStep()'>Next</button>`;
+      }
+    }
+
+    function showProposal() {
+      document.getElementById('screen').innerHTML = `
+        <h1>Will You Marry Me?</h1>
+        <button onclick='yesClicked()'>Yes</button>
+        <button id='no-btn' onmouseover='moveNoButton(this)'>No</button>
+      `;
+    }
+
+    function moveNoButton(btn) {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+      btn.style.position = 'absolute';
+      btn.style.left = x + 'px';
+      btn.style.top = y + 'px';
+    }
+
+    function yesClicked() {
+      document.getElementById('screen').innerHTML = `
+        <h1>I Love You #Gayatri</h1>
+        <button onclick='showEyeMessage()'>👀</button>
+      `;
+    }
+
+    function showEyeMessage() {
+      document.getElementById('screen').innerHTML = `
+        <p style='font-size: 1.5em;'>मैं वही हूँ जिसकी कोई तमन्ना नहीं<br>तुम्हारे सिवा !<br><br><b>Love u forever Gayatri💞</b></p>
+        <button onclick='goHome()'>🏡</button>
+      `;
+    }
+
+    function goHome() {
+      document.getElementById('screen').innerHTML = `
+        <h1>Anand ❤️ Gayatri</h1>
+        <p>Jaisa Radha-Krishna ka nirmal prem, vaisa hi Anand ka Gayatri ke liye prem hai.</p>
+        <p>Prem hai shuddh, pavitra, aur anant.</p>
+        <br><h2>Leave Your Feedback</h2>
+        <input type='text' id='name' placeholder='Your Name'><br><br>
+        <textarea id='message' placeholder='Your Message'></textarea><br><br><button onclick='sendFeedback()'>Send Feedback</button>
+  `;
+}
+
+function sendFeedback() {
+  const name = document.getElementById('name').value;
+  const msg = document.getElementById('message').value;
+  const token = '7881165847:AAErGr-hKtfCrgY2o4KMCqJVxeQRD8MCKnI';
+  const chatId = '7291963092';
+  const message = `❤️ *Feedback Received*\n\n👤 Name: ${name}\n📝 Message: ${msg}`;
+
+  fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: message,
+      parse_mode: 'Markdown'
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Thank you for your feedback!");
+  })
+  .catch(err => {
+    alert("Something went wrong. Try again later.");
+  });
+}
+
+// Snowfall animation
+setInterval(() => {
+  const snow = document.createElement('div');
+  snow.classList.add('snowflake');
+  snow.innerText = '❄';
+  snow.style.left = Math.random() * window.innerWidth + 'px';
+  snow.style.animationDuration = (Math.random() * 3 + 2) + 's';
+  document.body.appendChild(snow);
+  setTimeout(() => snow.remove(), 5000);
+}, 200);
+
+  </script>
+</body>
+</html>
